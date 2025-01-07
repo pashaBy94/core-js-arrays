@@ -569,17 +569,15 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
 function shiftArray(arr, n) {
-  const res = [...arr];
-  return arr.reduce((ac, el, ind) => {
+  const res = [];
+  return arr.reduce((__, el, ind) => {
     const j = ind + n;
     let o;
-    if (j < arr.length && j >= 0) {
-      o = j;
-    } else if (j >= arr.length) {
+    if (j < arr.length && j >= 0) o = j;
+    else if (j >= arr.length) {
       o = j % arr.length;
-    } else {
-      o = arr.length + (j % arr.length);
-    }
+    } else o = arr.length + (j % arr.length);
+
     res[o] = el;
     return res;
   }, []);
@@ -637,8 +635,7 @@ function sortDigitNamesByNumericOrder(arr) {
 function swapHeadAndTail(arr) {
   if (arr.length % 2) {
     const first = arr.splice(0, Math.floor(arr.length / 2));
-    const second = arr.splice(1);
-    return second.concat(arr, first);
+    return arr.splice(1).concat(arr, first);
   }
   const first = arr.splice(0, Math.floor(arr.length / 2));
   return arr.concat(first);
